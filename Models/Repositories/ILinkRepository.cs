@@ -11,5 +11,8 @@ namespace LinkAggregator.Models.Repositories
         IEnumerable<LinkEntity> AllLinks { get; }
         int GetPoints(int linkId);
         LinkEntity GetLink(int linkId);
+        LinkEntity AddLink(LinkEntity newLink);
+        LinkEntity RemoveLink(int id);
+        int Commit();
     }
 }

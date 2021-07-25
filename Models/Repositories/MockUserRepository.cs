@@ -23,6 +23,16 @@ namespace LinkAggregator.Models.Repositories
             } },
         };
 
+        public UserEntity AddUser(UserEntity newUser)
+        {
+            return newUser;
+        }
+
+        public int Commit()//Not needed in mock
+        {
+            return 1;
+        }
+
         public UserEntity GetUserById(int userId)
         {
             return AllUsers.FirstOrDefault(user => user.UserId == userId);
@@ -37,6 +47,11 @@ namespace LinkAggregator.Models.Repositories
         public IEnumerable<LinkEntity> GetUserLinks(int userId)
         {
             return AllUsers.FirstOrDefault(user => user.UserId == userId).Links;
+        }
+
+        public UserEntity RemoveUser(int userId)
+        {
+            return new UserEntity();
         }
     }
 }
