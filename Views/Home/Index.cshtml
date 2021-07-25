@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+﻿@model LinkListViewModel
+<ul class="list-group">
+    @foreach (var item in Model.Links)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">@item.Title</div>
+                @item.Url
+            </div>
+            @if(item.Points > 0) { 
+                <span class="badge bg-success rounded-pill">Score: @item.Points</span>
+                }
+                else if(item.Points < 0)
+                {
+                    <span class="badge bg-danger rounded-pill">Score: @item.Points</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary rounded-pill">Score: @item.Points</span>
+                }
+        </li>
+    }
+</ul>
