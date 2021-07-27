@@ -1,6 +1,10 @@
-﻿@model LinkListViewModel
+﻿@model PaginatedLinkList<LinkEntity>
+@{
+    var prevDisabled = !Model.PreviousPage ? "disabled btn-dark" : "btn-primary";
+    var nextDisabled = !Model.NextPage ? "disabled btn-dark" : "btn-primary";
+}
 <ul class="list-group">
-    @foreach (var item in Model.Links)
+    @foreach (var item in Model)
     {
         <li class="list-group-item d-flex flex-row align-items-center">
             <div>
@@ -8,11 +12,14 @@
                 <a class="btn btn-hover-danger"><i class="bi bi-arrow-down text-danger"></i></a>
             </div>
             <div class="ms-2">
-                <div class="fw-bold">@item.Title</div>
-                @item.Url
-                @item.CreationDate
-                @item.LinkId
-                @item.Creator
+                <div class="">
+                    <span class="fw-bold">@item.Title</span>
+                    <span class=""><a href="http://@item.Url" class="text-decoration-none">@item.Url</a></span>
+                </div>
+                <div class="ms-auto">
+                    <span class="text-muted">Added on: @item.CreationDate</span>
+                    <span class="">// @item.Creator</span>
+                </div>
             </div>
             @if (item.Points > 0)
             {
@@ -29,3 +36,8 @@
         </li>
     }
 </ul>
+
+<div class="p-0 justify-content-center d-flex">
+    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn @prevDisabled"><i class="bi bi-arrow-left"></i></a>
+    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn @nextDisabled"><i class="bi bi-arrow-right"></i></a>
+</div>

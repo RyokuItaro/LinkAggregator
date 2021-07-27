@@ -12,7 +12,13 @@ namespace LinkAggregator.Models.Repositories
         {
             db = appDbContext;
         }
-
+        public IQueryable<LinkEntity> AllLinksQueryable
+        {
+            get
+            {
+                return db.Links;
+            }
+        }
         public IEnumerable<LinkEntity> AllLinks
         {
             get

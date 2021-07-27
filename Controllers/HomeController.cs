@@ -19,11 +19,10 @@ namespace LinkAggregator.Controllers
             _linkRepository = linkRepository;
         }
 
-        public ViewResult Index()
+        public async Task<IActionResult> Index(int pageNumber = 1)
         {
-            var linksViewModel = new LinkListViewModel();
-            linksViewModel.Links = _linkRepository.AllLinks;
-            return View(linksViewModel);
+            var links = _linkRepository.AllLinksQueryable.OrderBy(l => l.Points);
+            return View(await PaginatedLinkList<LinkEntity>.CreateAsync(links, pageNumber, 100));
         }
         public IActionResult AddLink()
         {
@@ -55,6 +54,14 @@ namespace LinkAggregator.Controllers
         {
             _linkRepository.ClearRecords();
             _linkRepository.Commit();
+            return RedirectToAction("Index");
+        }
+        public IActionResult UpVote(int linkId)
+        {
+            return RedirectToAction("Index");
+        }
+        public IActionResult DownVote(int linkId)
+        {
             return RedirectToAction("Index");
         }
     }
