@@ -1,16 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LinkAggregator.Models
 {
-    public class UserEntity
+    public class UserEntity : IdentityUser
     {
-        public int UserId { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public DateTime AccountCreateDate { get; set; }
-        public string EmailAdress { get; set; }
-        public IEnumerable<LinkEntity> Links { get; set; }
+        [PersonalData]
+        [Column(TypeName = "nvarchar(100)")]
+        public string VisibleName { get; set; }
 
     }
 }

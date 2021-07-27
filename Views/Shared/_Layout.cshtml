@@ -10,24 +10,31 @@
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">LinkAggregator</a>
+            <a class="navbar-brand" asp-action="Index" asp-controller="Home">LinkAggregator</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <a class="btn btn-light" asp-action="AddLink">Add a Link!</a>
+                    <a class="btn btn-danger" asp-action="ClearRecords">RED BUTTON</a>
+                </div>
+                <div class="navbar-nav ms-auto">
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </div>
     </nav>
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             @RenderBody()
         </div>
     </div>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

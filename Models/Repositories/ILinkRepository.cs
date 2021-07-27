@@ -14,5 +14,6 @@ namespace LinkAggregator.Models.Repositories
         LinkEntity AddLink(LinkEntity newLink);
         LinkEntity RemoveLink(int id);
         int Commit();
+        void ClearRecords();
     }
 }

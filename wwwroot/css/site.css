@@ -2,3 +2,14 @@
     font-family: 'Lato', sans-serif;
     background-color: #e6e6e6;
 }
+.bi-arrow-up, .bi-arrow-down {
+    font-size: 1.5rem;
+}
+.btn-hover-success:hover{
+    border: 1px solid green; 
+    border-radius: 100%;
+}
+.btn-hover-danger:hover {
+    border: 1px solid red;
+    border-radius: 100%;
+}

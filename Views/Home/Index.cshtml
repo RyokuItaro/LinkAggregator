@@ -2,22 +2,30 @@
 <ul class="list-group">
     @foreach (var item in Model.Links)
     {
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
+        <li class="list-group-item d-flex flex-row align-items-center">
+            <div>
+                <a class="btn btn-hover-success"><i class="bi bi-arrow-up text-success"></i></a>
+                <a class="btn btn-hover-danger"><i class="bi bi-arrow-down text-danger"></i></a>
+            </div>
+            <div class="ms-2">
                 <div class="fw-bold">@item.Title</div>
                 @item.Url
+                @item.CreationDate
+                @item.LinkId
+                @item.Creator
             </div>
-            @if(item.Points > 0) { 
-                <span class="badge bg-success rounded-pill">Score: @item.Points</span>
-                }
-                else if(item.Points < 0)
-                {
-                    <span class="badge bg-danger rounded-pill">Score: @item.Points</span>
-                }
-                else
-                {
-                    <span class="badge bg-secondary rounded-pill">Score: @item.Points</span>
-                }
+            @if (item.Points > 0)
+            {
+                <span class="badge bg-success rounded-pill ms-auto">Score: @item.Points</span>
+            }
+            else if (item.Points < 0)
+            {
+                <span class="badge bg-danger rounded-pill ms-auto">Score: @item.Points</span>
+            }
+            else
+            {
+                <span class="badge bg-secondary rounded-pill ms-auto">Score: @item.Points</span>
+            }
         </li>
     }
 </ul>

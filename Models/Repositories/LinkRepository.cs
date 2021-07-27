@@ -56,5 +56,9 @@ namespace LinkAggregator.Models.Repositories
             }
             return link;
         }
+        public void ClearRecords()
+        {
+            db.Links.RemoveRange(db.Links);
+        }
     }
 }
