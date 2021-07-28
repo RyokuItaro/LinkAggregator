@@ -8,8 +8,8 @@
     {
         <li class="list-group-item d-flex flex-row align-items-center">
             <div>
-                <a class="btn btn-hover-success"><i class="bi bi-arrow-up text-success"></i></a>
-                <a class="btn btn-hover-danger"><i class="bi bi-arrow-down text-danger"></i></a>
+                <a asp-action="UpVote" asp-route-linkId="@item.LinkId" class="btn btn-hover-success"><i class="bi bi-arrow-up text-success"></i></a>
+                <a asp-action="DownVote" asp-route-linkId="@item.LinkId" class="btn btn-hover-danger"><i class="bi bi-arrow-down text-danger"></i></a>
             </div>
             <div class="ms-2">
                 <div class="">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="ms-auto">
                     <span class="text-muted">Added on: @item.CreationDate</span>
-                    <span class="">// @item.Creator</span>
+                    <span class="">// by: @item.Creator</span>
                 </div>
             </div>
             @if (item.Points > 0)

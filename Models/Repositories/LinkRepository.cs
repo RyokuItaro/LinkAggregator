@@ -66,5 +66,11 @@ namespace LinkAggregator.Models.Repositories
         {
             db.Links.RemoveRange(db.Links);
         }
+
+        public void Voting(int value, int linkId)
+        {
+            var linkToChangeScore = GetLink(linkId);
+            linkToChangeScore.Points += value;
+        }
     }
 }

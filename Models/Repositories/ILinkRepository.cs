@@ -16,5 +16,6 @@ namespace LinkAggregator.Models.Repositories
         LinkEntity RemoveLink(int id);
         int Commit();
         void ClearRecords();
+        void Voting(int value, int linkId);
     }
 }

@@ -1,10 +1,13 @@
 ﻿using LinkAggregator.Models;
 using LinkAggregator.Models.Repositories;
 using LinkAggregator.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,10 +16,12 @@ namespace LinkAggregator.Controllers
     public class HomeController : Controller
     {
         private readonly ILinkRepository _linkRepository;
+        private readonly UserManager<UserEntity> _userManager;
 
-        public HomeController(ILinkRepository linkRepository)
+        public HomeController(ILinkRepository linkRepository, UserManager<UserEntity> userManager)
         {
             _linkRepository = linkRepository;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(int pageNumber = 1)
@@ -24,18 +29,22 @@ namespace LinkAggregator.Controllers
             var links = _linkRepository.AllLinksQueryable.OrderBy(l => l.Points);
             return View(await PaginatedLinkList<LinkEntity>.CreateAsync(links, pageNumber, 100));
         }
+        [Authorize]
         public IActionResult AddLink()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult AddLink(LinkInputModel link)
+        [Authorize]
+        public async Task<IActionResult> AddLink(LinkInputModel link)
         {
+            var currentUser = await _userManager.GetUserAsync(User);
+            var displayName = currentUser.VisibleName;
             var linkToAdd = new LinkEntity();
             if (ModelState.IsValid)
             {
                 linkToAdd.CreationDate = DateTime.Now;
-                linkToAdd.Creator = "test";
+                linkToAdd.Creator = displayName;
                 linkToAdd.Points = 0;
                 linkToAdd.Title = link.Title;
                 linkToAdd.Url = link.Url;
@@ -56,12 +65,18 @@ namespace LinkAggregator.Controllers
             _linkRepository.Commit();
             return RedirectToAction("Index");
         }
+        [Authorize]
         public IActionResult UpVote(int linkId)
         {
+            _linkRepository.Voting(1, linkId);
+            _linkRepository.Commit();
             return RedirectToAction("Index");
         }
+        [Authorize]
         public IActionResult DownVote(int linkId)
         {
+            _linkRepository.Voting(-1, linkId);
+            _linkRepository.Commit();
             return RedirectToAction("Index");
         }
     }

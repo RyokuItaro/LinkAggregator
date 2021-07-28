@@ -79,7 +79,7 @@ namespace LinkAggregator.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new UserEntity { UserName = Input.VisibleName, Email = Input.Email};
+                var user = new UserEntity { UserName = Input.Email, Email = Input.Email, VisibleName = Input.VisibleName};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

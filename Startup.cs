@@ -34,6 +34,7 @@ namespace LinkAggregator
                 {
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
+                    options.SignIn.RequireConfirmedAccount = false;
                 }
                 ).AddEntityFrameworkStores<AppDbContext>();
             services.AddScoped<ILinkRepository, LinkRepository>();
