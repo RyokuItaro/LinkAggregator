@@ -26,7 +26,7 @@ namespace LinkAggregator.Controllers
 
         public async Task<IActionResult> Index(int pageNumber = 1)
         {
-            var links = _linkRepository.AllLinksQueryable.OrderBy(l => l.Points);
+            var links = _linkRepository.AllLinksQueryable.OrderByDescending(l => l.Points);
             return View(await PaginatedLinkList<LinkEntity>.CreateAsync(links, pageNumber, 100));
         }
         [Authorize]

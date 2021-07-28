@@ -1,39 +1,51 @@
 ﻿@model PaginatedLinkList<LinkEntity>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<UserEntity> UserManager
 @{
     var prevDisabled = !Model.PreviousPage ? "disabled btn-dark" : "btn-primary";
     var nextDisabled = !Model.NextPage ? "disabled btn-dark" : "btn-primary";
+    var currentUser = await UserManager.GetUserAsync(User);
+    var currentUserName = "";
+    if(currentUser != null)
+    {
+        currentUserName = currentUser.VisibleName;
+    }
 }
 <ul class="list-group">
     @foreach (var item in Model)
     {
-        <li class="list-group-item d-flex flex-row align-items-center">
-            <div>
-                <a asp-action="UpVote" asp-route-linkId="@item.LinkId" class="btn btn-hover-success"><i class="bi bi-arrow-up text-success"></i></a>
-                <a asp-action="DownVote" asp-route-linkId="@item.LinkId" class="btn btn-hover-danger"><i class="bi bi-arrow-down text-danger"></i></a>
+        
+    <li class="list-group-item d-flex flex-row align-items-center">
+        @if (!(item.Creator == currentUserName) && currentUserName!="")
+        {
+        <div>
+            <a asp-action="UpVote" asp-route-linkId="@item.LinkId" class="btn btn-hover-success"><i class="bi bi-arrow-up text-success"></i></a>
+            <a asp-action="DownVote" asp-route-linkId="@item.LinkId" class="btn btn-hover-danger"><i class="bi bi-arrow-down text-danger"></i></a>
+        </div>
+        }
+        <div class="ms-2">
+            <div class="">
+                <span class="fw-bold">@item.Title</span>
+                <span class=""><a href="http://@item.Url" class="text-decoration-none">@item.Url</a></span>
             </div>
-            <div class="ms-2">
-                <div class="">
-                    <span class="fw-bold">@item.Title</span>
-                    <span class=""><a href="http://@item.Url" class="text-decoration-none">@item.Url</a></span>
-                </div>
-                <div class="ms-auto">
-                    <span class="text-muted">Added on: @item.CreationDate</span>
-                    <span class="">// by: @item.Creator</span>
-                </div>
+            <div class="ms-auto">
+                <span class="text-muted">Added on: @item.CreationDate</span>
+                <span class="">// by: @item.Creator</span>
             </div>
-            @if (item.Points > 0)
-            {
-                <span class="badge bg-success rounded-pill ms-auto">Score: @item.Points</span>
-            }
-            else if (item.Points < 0)
-            {
-                <span class="badge bg-danger rounded-pill ms-auto">Score: @item.Points</span>
-            }
-            else
-            {
-                <span class="badge bg-secondary rounded-pill ms-auto">Score: @item.Points</span>
-            }
-        </li>
+        </div>
+        @if (item.Points > 0)
+        {
+            <span class="badge bg-success rounded-pill ms-auto">Score: @item.Points</span>
+        }
+        else if (item.Points < 0)
+        {
+            <span class="badge bg-danger rounded-pill ms-auto">Score: @item.Points</span>
+        }
+        else
+        {
+            <span class="badge bg-secondary rounded-pill ms-auto">Score: @item.Points</span>
+        }
+    </li>
     }
 </ul>
 
