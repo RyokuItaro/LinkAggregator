@@ -10,10 +10,12 @@
     {
         currentUserName = currentUser.VisibleName;
     }
+    var currentDate = DateTime.Now;
 }
 <ul class="list-group">
     @foreach (var item in Model)
     {
+        @if(item.CreationDate.AddDays(5) >= currentDate) {
         
     <li class="list-group-item d-flex flex-row align-items-center">
         @if (!(item.Creator == currentUserName) && currentUserName!="")
@@ -46,7 +48,7 @@
             <span class="badge bg-secondary rounded-pill ms-auto">Score: @item.Points</span>
         }
     </li>
-    }
+    } }
 </ul>
 
 <div class="p-0 justify-content-center d-flex">

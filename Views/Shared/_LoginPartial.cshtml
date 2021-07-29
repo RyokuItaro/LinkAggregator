@@ -9,7 +9,7 @@
         var currentUser = await UserManager.GetUserAsync(User);
         var displayName = currentUser.VisibleName;
         <li class="nav-item mt-2 mt-lg-0">
-            <a id="manage" class="nav-link text-dark btn btn-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @displayName!</a>
+            <a id="manage" class="nav-link text-dark btn btn-light" asp-controller="Profile" asp-action="Index">Hello @displayName!</a>
         </li>
         <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

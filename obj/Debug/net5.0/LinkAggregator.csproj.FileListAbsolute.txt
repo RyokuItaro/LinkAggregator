@@ -165,3 +165,4 @@ C:\Users\kk355\source\repos\LinkAggregator\obj\Debug\net5.0\Razor\Areas\Identity
 C:\Users\kk355\source\repos\LinkAggregator\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\Users\kk355\source\repos\LinkAggregator\obj\Debug\net5.0\Razor\Views\Home\AddLink.cshtml.g.cs
 C:\Users\kk355\source\repos\LinkAggregator\obj\Debug\net5.0\Razor\Views\Home\LinkAdded.cshtml.g.cs
+C:\Users\kk355\source\repos\LinkAggregator\obj\Debug\net5.0\Razor\Views\Profile\Index.cshtml.g.cs
