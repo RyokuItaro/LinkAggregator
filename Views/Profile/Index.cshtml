@@ -11,38 +11,42 @@
 
 <div class="col">
     <span>Here are some links added by you!</span>
-<ul class="list-group">
-    @foreach (var item in usersLinks)
-    {
-        <li class="list-group-item d-flex flex-row align-items-center">
-            <div class="ms-2">
-                <div class="">
-                    <span class="fw-bold">@item.Title</span>
-                    <span class=""><a href="@item.Url" class="text-decoration-none">@item.Url</a></span>
+    <ul class="list-group">
+        @foreach (var item in usersLinks)
+        {
+            <li class="list-group-item d-flex flex-row align-items-center">
+                <div class="ms-2">
+                    <div class="">
+                        <span class="fw-bold">@item.Title</span>
+                        <span class=""><a href="@item.Url" class="text-decoration-none">@item.Url</a></span>
+                    </div>
+                    <div class="ms-auto">
+                        <span class="text-muted">Added on: @item.CreationDate</span>
+                        <span class="">// by: @item.Creator</span>
+                    </div>
                 </div>
-                <div class="ms-auto">
-                    <span class="text-muted">Added on: @item.CreationDate</span>
-                    <span class="">// by: @item.Creator</span>
-                </div>
-            </div>
-            @if (item.Points > 0)
-            {
-                <span class="badge bg-success rounded-pill ms-auto">Score: @item.Points</span>
-            }
-            else if (item.Points < 0)
-            {
-                <span class="badge bg-danger rounded-pill ms-auto">Score: @item.Points</span>
-            }
-            else
-            {
-                <span class="badge bg-secondary rounded-pill ms-auto">Score: @item.Points</span>
-            }
-        </li>
-    }
-</ul>
+                @if (item.Points > 0)
+                {
+                    <span class="badge bg-success rounded-pill ms-auto">Score: @item.Points</span>
+                }
+                else if (item.Points < 0)
+                {
+                    <span class="badge bg-danger rounded-pill ms-auto">Score: @item.Points</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary rounded-pill ms-auto">Score: @item.Points</span>
+                }
+            </li>
+        }
+    </ul>
 
-<div class="p-0 justify-content-center d-flex">
-    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn @prevDisabled"><i class="bi bi-arrow-left"></i></a>
-    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn @nextDisabled"><i class="bi bi-arrow-right"></i></a>
-</div>
-</div>
+    @if (usersLinks.Count() > 0 && usersLinks != null)
+    {
+        <div class="p-0 justify-content-center d-flex">
+            <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn @prevDisabled"><i class="bi bi-arrow-left"></i></a>
+            <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn @nextDisabled"><i class="bi bi-arrow-right"></i></a>
+        </div>
+     }
+        
+    </div>
